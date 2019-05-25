@@ -1,4 +1,4 @@
-#include "record.h"
+#include "register.h"
 #include "dynamichashing.h"
 
 DynamicHashing::DynamicHashing(std::string filename) {

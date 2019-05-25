@@ -1,4 +1,4 @@
-#include "record.h"
+#include "register.h"
 #include "randomfile.h"
 
 RandomFile::RandomFile(std::string filename) {

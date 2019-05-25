@@ -2,7 +2,7 @@
 #define DYNAMIC_HASHING_H_
 
 #include "register.h"
-#include "organizer.h"
+#include "fileorganizer.h"
 
 class DynamicHashing : public Organizer {
 // TODO : Define variables and methods

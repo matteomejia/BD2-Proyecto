@@ -1,10 +1,12 @@
 #ifndef B_PLUS_TREE_INDEX_H_
 #define B_PLUS_TREE_INDEX_H_
 
-#include "register.h"
-#include "organizer.h"
+#include <iostream>
 
-class BPlusTreeIndex : public Organizer {
+#include "register.h"
+#include "fileorganizer.h"
+
+class BPlusTreeIndex : public FileOrganizer {
 // TODO : Define variables and methods
 
 public:

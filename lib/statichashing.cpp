@@ -1,4 +1,4 @@
-#include "record.h"
+#include "register.h"
 #include "statichashing.h"
 
 StaticHaching::StaticHaching(std::string filename) {

@@ -2,7 +2,7 @@
 #define STATIC_HASHING_H_
 
 #include "register.h"
-#include "organizer.h"
+#include "fileorganizer.h"
 
 class StaticHashing : public Organizer {
 // TODO : Define variables and methods

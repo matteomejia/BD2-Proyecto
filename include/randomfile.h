@@ -2,7 +2,7 @@
 #define RANDOM_FILE_H_
 
 #include "register.h"
-#include "organizer.h"
+#include "fileorganizer.h"
 
 class RandomFile : public Organizer {
 // TODO : Define variables and methods
