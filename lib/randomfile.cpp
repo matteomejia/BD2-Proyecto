@@ -1,5 +1,6 @@
-#include "record.h"
-#include "randomfile.h"
+#include "../include/register.h"
+#include "../include/randomfile.h"
+#include <iostream>
 
 RandomFile::RandomFile(std::string filename) {
 	this->filename_ = filename;
@@ -7,7 +8,7 @@ RandomFile::RandomFile(std::string filename) {
 	// TODO : Initialize random file
 }
 
-void RandomFile::writeRecord(Record record) {
+/*void RandomFile::writeRecord(Register record) {
 }
 	// TODO : Open this->filename and write raw record
 
@@ -22,3 +23,4 @@ void RandomFile::insert(Register record) {
 Register RandomFile::search(int record_id) {
 	// TODO : Find and return register with id = record_id
 }
+*/

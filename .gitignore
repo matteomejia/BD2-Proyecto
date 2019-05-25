@@ -30,3 +30,11 @@
 *.exe
 *.out
 *.app
+
+# Extra
+*.ipch
+cmake-build-debug/*
+.vscode/*
+CMakeLists.txt
+*.out
+

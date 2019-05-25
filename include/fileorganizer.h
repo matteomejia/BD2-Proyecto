@@ -2,12 +2,13 @@
 #define FILE_ORGANIZER_H_
 
 #include "register.h"
+#include <iostream>
 
 class FileOrganizer {
 protected:
 	std::string filename_;
 
-	void writeRecord(Record record);
+	void writeRecord(Register record);
 	Register readRecord(int index);
 
 public:
