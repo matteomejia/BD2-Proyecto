@@ -18,16 +18,6 @@ class Player{
     char salary[30];
 
     public:
-    Player(char ID[12], char name[30], char age[2], char position[20], char country[20], char league[30], char club[50], char salary[30]) {
-        this.ID = ID;
-        this.name = name;
-        this.age = age;
-        this.position = position;
-        this.country = country;
-        this.league = league;
-        this.club = club;
-        this.salary = salary;
-    }
 
     void getPlayer() {
         std::cout << "\nEnter ID: ";
@@ -48,6 +38,10 @@ class Player{
         std::cin.getline(salary, 30);
     }
 
+    char *getID() {
+        return ID;
+    }
+
     void showPlayer() {
         std::cout << "ID: " << ID << "\n";
         std::cout << "Name: " << name << "\n";
@@ -60,26 +54,46 @@ class Player{
     }
 
     void modifyPlayer() {
-
+        std::cout << "ID: ";
+        std::cin.getline()
     }
 };
 
 class Database {
     private:
-    std::vector<Player> players;
+    Player player;
     std::fstream fp;
 
     public:
-    void addPlayer(Player player) {
-        players.push_back(player);
-    }
 
     void writePlayers() {
-        int count;
+        int next;
         fp.open("Players.DAT", std::ios::out | std::ios::app);
-        for (Player player : players) {
-            fp.write((char*)&player, sizeof(Player));
-        }
+        do
+        {
+            player.getPlayer();
+            fp.write((char*)&player, sizeof(player));
+            std::cout << "1 for next player, 0 to stop: " << std::endl;
+            std::cin >> next;
+        } while (next == 1);
         fp.close();
     }
-}
+
+    void modifyPlayer() {
+        int found = 0;
+        char n[20];
+
+        std::cout << "Enter ID: ";
+        std::cin >> n;
+
+        fp.open("Players.DAT", std::ios::in | std::ios::out);
+
+        while (fp.read((char*)&player, sizeof(player)))
+        {
+            if(player->getID().compare(n) == 0) {
+
+            }
+        }
+        
+    }
+};
