@@ -7,12 +7,14 @@ RandomFile::RandomFile(std::string filename) {
 	// TODO : Initialize random file
 }
 
-void RandomFile::writeRecord(Record record) {
+void RandomFile::writeRecord(Register record) {
 }
 	// TODO : Open this->filename and write raw record
 
-void RandomFile::readRecord(int index) {
+Register RandomFile::readRecord(int index) {
 	// TODO : Open this->filename and read raw record in position index
+
+	return Register();
 }
 
 void RandomFile::insert(Register record) {
@@ -21,4 +23,6 @@ void RandomFile::insert(Register record) {
 
 Register RandomFile::search(int record_id) {
 	// TODO : Find and return register with id = record_id
+
+	return Register();
 }

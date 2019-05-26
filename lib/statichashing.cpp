@@ -1,18 +1,20 @@
 #include "register.h"
 #include "statichashing.h"
 
-StaticHaching::StaticHaching(std::string filename) {
+StaticHashing::StaticHashing(std::string filename) {
 	this->filename_ = filename;
 
 	// TODO : Initialize static hash table
 }
 
-void StaticHashing::writeRecord(Record record) {
+void StaticHashing::writeRecord(Register record) {
 	// TODO : Open this->filename and write raw record
 }
 
-void StaticHashing::readRecord(int index) {
+Register StaticHashing::readRecord(int index) {
 	// TODO : Open this->filename and read raw record in position index
+
+	return Register();
 }
 
 void StaticHashing::insert(Register record) {
@@ -21,4 +23,6 @@ void StaticHashing::insert(Register record) {
 
 Register StaticHashing::search(int record_id) {
 	// TODO : Find and return register with id = record_id
+
+	return Register();
 }

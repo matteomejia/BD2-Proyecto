@@ -9,13 +9,13 @@ class FileOrganizer {
 protected:
 	std::string filename_;
 
-	void writeRecord(Register record);
-	Register readRecord(int index);
-	void test();
+	virtual void writeRecord(Register record) = 0;
+	virtual Register readRecord(int index) = 0;
 
 public:
-	void insert(Register record);
-	Register search(int record_id);
+	FileOrganizer() = default;
+	virtual void insert(Register record) = 0;
+	virtual Register search(int record_id) = 0;
 };
 
 #endif

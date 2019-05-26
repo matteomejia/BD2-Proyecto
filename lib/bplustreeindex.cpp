@@ -15,6 +15,8 @@ void BPlusTreeIndex::writeRecord(Register record) {
 
 Register BPlusTreeIndex::readRecord(int index) {
 	// TODO : Open this->filename and read raw record in position index
+
+	return Register();
 }
 
 void BPlusTreeIndex::insert(Register record) {
@@ -23,8 +25,6 @@ void BPlusTreeIndex::insert(Register record) {
 
 Register BPlusTreeIndex::search(int record_id) {
 	// TODO : Find and return register with id = record_id
-}
 
-void BPlusTreeIndex::test() {
-	return;
+	return Register();
 }
