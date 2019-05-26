@@ -20,4 +20,5 @@ public:
 	Register search(int record_id) override;
 };
 
+
 #endif

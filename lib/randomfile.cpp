@@ -11,7 +11,6 @@ RandomFile::RandomFile(std::string filename)
 {
 	this->filename_ = filename;
 	// TODO : Initialize random file
-}
 
 void RandomFile::writeRecord(Register record)
 {
@@ -34,6 +33,7 @@ Register RandomFile::readRecord(int index)
 void RandomFile::insert(Register record)
 {
 	// TODO : Insert record into table
+
 }
 
 Register RandomFile::search(int record_id)

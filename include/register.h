@@ -9,7 +9,7 @@ class Register
 public:
 	Register();
 	Register(
-		int id
+		char id[20]
 		// TODO : Add attributes
 	);
 	Register(const Register& record); // Copy constructor

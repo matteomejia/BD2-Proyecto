@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/test.dir/src/lab.cpp.o CMakeFiles/test.dir/lib/statichashing.cpp.o CMakeFiles/test.dir/lib/randomfile.cpp.o  -o test 
