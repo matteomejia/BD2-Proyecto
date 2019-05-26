@@ -11,6 +11,7 @@ RandomFile::RandomFile(std::string filename)
 {
 	this->filename_ = filename;
 	// TODO : Initialize random file
+}
 
 void RandomFile::writeRecord(Register record)
 {
