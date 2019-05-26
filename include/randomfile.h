@@ -9,6 +9,10 @@ class RandomFile : public FileOrganizer {
 
 public:
 	RandomFile(std::string filename);
+	void writeRecord(Register record);
+	void readRecord(int index);
+	void insert(Register record);
+	Register search(int record_id);
 };
 
 #endif
