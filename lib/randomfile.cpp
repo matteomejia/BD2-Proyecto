@@ -11,6 +11,7 @@ RandomFile::RandomFile(std::string filename)
 {
 	this->filename_ = filename;
 	// TODO : Initialize random file
+}
 
 void RandomFile::writeRecord(Register record)
 {
@@ -57,12 +58,11 @@ Register RandomFile::search(int record_id)
 		fp.read((char*)&temp, sizeof(temp));
 	}
 
-	temp.showData();
-
+	Register tregister = new Register(temp.getID());
 	fp.close();
 
 
 	// TODO : Create Register() to be returned
 	
-	return Register();
+	return tregister;
 }
