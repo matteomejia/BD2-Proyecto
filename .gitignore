@@ -37,3 +37,10 @@ tests
 
 # Swap files
 *.swp
+
+# Extra
+*.ipch
+cmake-build-debug/*
+.vscode/*
+CMakeLists.txt
+*.out
