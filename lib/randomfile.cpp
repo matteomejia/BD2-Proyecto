@@ -33,7 +33,9 @@ Register RandomFile::readRecord(int index)
 void RandomFile::insert(Register record)
 {
 	// TODO : Insert record into table
+	//std::vector<Register> records;
 
+	records.push_back(record);
 }
 
 Register RandomFile::search(int record_id)
@@ -50,6 +52,12 @@ Register RandomFile::search(int record_id)
 
 	fp.open(filename_, std::ios::in);
 	fp.read((char*)&temp, sizeof(temp));
+
+	while(strcmp(temp.getID(), n) != 0) {
+		fp.read((char*)&temp, sizeof(temp));
+	}
+
+	temp.showData();
 
 	fp.close();
 
