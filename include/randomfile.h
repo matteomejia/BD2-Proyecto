@@ -9,10 +9,6 @@
 class RandomFile : public FileOrganizer
 {
 // TODO : Define variables and methods
-
-	void writeRecord(Register record) override;
-	Register readRecord(int index) override;
-
 public:
 	RandomFile(std::string filename);
 
