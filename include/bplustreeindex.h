@@ -6,7 +6,8 @@
 #include "register.h"
 #include "fileorganizer.h"
 
-class BPlusTreeIndex : public FileOrganizer {
+class BPlusTreeIndex : public FileOrganizer
+{
 // TODO : Define variables and methods
 
 	void writeRecord(Register record) override;

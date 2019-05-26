@@ -1,7 +1,8 @@
 #ifndef REGISTER_H_
 #define REGISTER_H_
 
-class Register {
+class Register
+{
 	int id_;
 	// TODO : Define all attributes...
 
@@ -12,6 +13,11 @@ public:
 		// TODO : Add attributes
 	);
 	Register(const Register& record); // Copy constructor
+	
+	inline const int getID() const
+	{
+		return this->id_;
+	}
 };
 
 #endif

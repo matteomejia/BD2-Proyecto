@@ -1,6 +1,7 @@
 #include "register.h"
 
-Register::Register() {
+Register::Register()
+{
 	// TODO : Initialize empty register
 }
 
@@ -12,6 +13,7 @@ Register::Register(
 	// Add remaining attributes to initializer list
 {}
 
-Register::Register(const Register& record) {
+Register::Register(const Register& record)
+{
 	// TODO : Copy data from record to *this
 }

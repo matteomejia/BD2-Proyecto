@@ -4,8 +4,10 @@
 #include <iostream>
 
 #include "register.h"
+#include <iostream>
 
-class FileOrganizer {
+class FileOrganizer
+{
 protected:
 	std::string filename_;
 
