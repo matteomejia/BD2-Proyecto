@@ -9,10 +9,6 @@
 class StaticHashing : public FileOrganizer
 {
 // TODO : Define variables and methods
-
-	void writeRecord(Register record) override;
-	Register readRecord(int index) override;
-
 public:
 	StaticHashing(std::string filename);
 
