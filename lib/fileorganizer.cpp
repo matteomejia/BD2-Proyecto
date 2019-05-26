@@ -3,16 +3,9 @@
 #include "register.h"
 #include "fileorganizer.h"
 
-void FileOrganizer::writeRecord(Register record)
+void FileOrganizer::writeRecord(Register record, int index)
 {
-	// TODO : Open this->filename and write raw record
-
-	std::ofstream fp;
-	fp.open(this->filename_, std::ios::out | std::ios::app);
-
-	fp.write((char*)&record, sizeof(record));
-	fp.close();
-
+	// TODO : Open this->filename and write raw record in position index
 }
 
 Register FileOrganizer::readRecord(int index)
