@@ -8,9 +8,10 @@
 
 class RandomFile : public FileOrganizer
 {
-// TODO : Define variables and methods
+	// TODO : Define variables and methods
+	std::vector<std::pair<int, std::string>> pairs;
 public:
-	RandomFile(std::string filename);
+	RandomFile(std::string filename, std::string outfile);
 
 	void insert(Register record) override;
 	Register search(int record_id) override;
