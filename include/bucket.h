@@ -3,7 +3,7 @@
 #include <vector>
 
 class Bucket{
-private:
+public:
     int id;
     std::string name;
     Bucket *next = nullptr;
