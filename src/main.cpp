@@ -4,9 +4,8 @@
 
 using namespace std;
 
-int main ()
-{
-	RandomFile("file");
+int main () {
+	
 	
 	return 0;
 }

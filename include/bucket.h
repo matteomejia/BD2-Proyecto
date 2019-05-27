@@ -14,5 +14,5 @@ public:
         this->name = name;
         this->next = nullptr;
         this->count = 0;
-    };
+    }
 };
