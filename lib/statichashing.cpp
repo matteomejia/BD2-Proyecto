@@ -8,11 +8,11 @@
 #include <sstream>
 
 Hash::Hash(std::string filename) {
-	ifstream hashFile;
+	std::ifstream hashFile;
     hashFile.open(filename);
 
     if(hashFile.is_open()){
-        string temp;
+        std::string temp;
         getline(hashFile, temp);
         this->size = std::stoi(temp);
         getline(hashFile, temp);
@@ -26,48 +26,45 @@ Hash::Hash(std::string filename) {
 
 Hash::Hash(int size, int fd, std::string filename) {
 	this->size = size;
-    this->hashTable = new Bucket[size];
+    this->hashTable.resize(size);
     this->fd = fd;
 
     for(int i = 0; i < size; i++) {
-        Bucket temp;
-        temp->id = i;
-        temp->name = to_string(i).append(".md");
-
+        Bucket temp(i, std::to_string(i).append(".md"), nullptr);
         this->hashTable[i] = temp;
     }
 
     this->bucketNum = size;
 
-    ifstream input;
+    std::ifstream input;
     input.open(filename);
 
-    string temp;
+    std::string temp;
     if(input.is_open()){
-        while(getline(input,temp)){
+        while(getline(input, temp)){
             insert(temp);
         }
     }
     input.close();
 
-    ofstream output;
+    std::ofstream output;
     output.open("hash.md");
     if(output.is_open()){
-        output << to_string(size) << endl;
-        output << to_string(bucketNum) << endl;
-        output << to_string(fd) << endl;
+        output << std::to_string(size) << std::endl;
+        output << std::to_string(bucketNum) << std::endl;
+        output << std::to_string(fd) << std::endl;
     }
     output.close();
 
     for (int i = 0; i < size; i++) {
-        ofstream index;
-        index.open(to_string(i).append("index.md"));
+        std::ofstream index;
+        index.open(std::to_string(i).append("index.md"));
         if(index.is_open()){
-            index << (hashTable[i])->name << endl;
-            Bucket *temp = (hashTable[i])->overflow;
+            index << (hashTable[i]).name << std::endl;
+            Bucket *temp = (hashTable[i]).next;
             while(temp){
-                index << temp->name << endl;
-                temp = temp->overflow;
+                index << temp->name << std::endl;
+                temp = temp->next;
             }
         }
         index.close();
@@ -86,18 +83,15 @@ bool fullBucket(Bucket *bucket) {
 	}
 }
 
-void insert(string insert) {
+void insert(std::string insert) {
 	Bucket *bucket = hashTable[hashingFunction(std::stoi(insert.substr(0, insert.find(","))))];
 
-	while(bucket->overflow != nullptr) {
-		bucket = bucket->overflow;
+	while(bucket->next != nullptr) {
+		bucket = bucket->next;
 	}
 
 	if(fullBucket(bucket)) {
-		Bucket *temp = new Bucket();
-		temp->id = bucketNum;
-		temp->name = std::to_string(bucketNum).append(".md");
-		bucket->overflow = temp;
+		Bucket *temp = new Bucket(bucketNum, std::to_string(bucketNum).append(".md"), temp);
 		bucketNum++;
 		bucket = temp;
 	}

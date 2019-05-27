@@ -15,7 +15,7 @@ private:
     int size;
     int fd;
     int bucketNum = 0;
-    Bucket *hashTable;
+    std::vector<Bucket> hashTable;
 
 public:
 	Hash(std::string filename);
