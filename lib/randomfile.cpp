@@ -1,67 +1,148 @@
 #include <iostream>
-#include <fstream>
-#include <string>
-#include <vector>
-#include <sstream>
-
-#include "register.h"
+#include<fstream>
+#include<cstdio>
 #include "randomfile.h"
 
-void parseCSV(std::ifstream &file, std::vector<std::vector<std::string>> &csv)
-{
-    std::string line;
-    while(std::getline(file,line)) {
-        std::stringstream ss(line);
-        std::string cell;
-        std::vector<std::string> row;
-        while(std::getline(ss , cell, ','))
-        {
-            row.push_back(cell);
+using namespace std;
+
+void Record::setData() {
+    cout << "Name: ";
+    cin >> name;
+    cout << "Age: ";
+    cin >> age;
+    cout << "Nationality: ";
+    cin >> nationality;
+    cout << "Overall: ";
+    cin >> overall;
+    cout << "Club: ";
+    cin >> club;
+    cout << "Value: ";
+    cin >> value;
+    cout << "Position: ";
+    cin >> position;
+    cout << "Number: ";
+    cin >> jersey_number;
+}
+
+void Record::showData() {
+    cout << "Name: " << name;
+    cout << "Age: " << age;
+    cout << "Nationality: " << nationality;
+    cout << "Overall: " << overall;
+    cout << "Club: " << club;
+    cout << "Value: " << value;
+    cout << "Position: " << position;
+    cout << "Number: " << jersey_number;
+}
+
+long Record::write(fstream &stream) {
+    long pos_begin = stream.tellp();
+    stream.write((char *) &jersey_number, sizeof(jersey_number));
+    writeString(stream, name);
+    writeString(stream, age);
+    writeString(stream, nationality);
+    writeString(stream, overall);
+    writeString(stream, club);
+    writeString(stream, value);
+    writeString(stream, position);
+    return pos_begin;
+}
+
+bool Record::read(fstream &stream) {
+    stream.read((char *) &jersey_number, sizeof(jersey_number));
+    if (stream.fail()) return false;
+    name = readString(stream);
+    age = readString(stream);
+    nationality = readString(stream);
+    overall = readString(stream);
+    club = readString(stream);
+    value = readString(stream);
+    position = readString(stream);
+    return true;
+}
+
+VariableRecordFile::VariableRecordFile(string &_fileName) {
+    this->fileName = _fileName;
+    this->indexName = _fileName + "_ind";
+}
+
+void VariableRecordFile::writeRecord(Record obj) {
+    fstream outFile;
+    long pos;
+
+    outFile.open(this->fileName, ios::binary | ios::app);
+    if (outFile.is_open()) {
+        pos = obj.write(outFile);
+        outFile.close();
+
+        outFile.open(this->indexName, ios::binary | ios::app);
+        if (outFile.is_open()) {
+            outFile.write((char *) &pos, sizeof(pos));
+            outFile.close();
+        } else cout << "Could not open the file.\n";
+
+    } else cout << "Could not open the file.\n";
+}
+
+void VariableRecordFile::scanAll() {
+    fstream inFile;
+    inFile.open(this->fileName, ios::in | ios::binary);
+    Record obj;
+    if (inFile.is_open()) {
+        while (obj.read(inFile)) {
+            obj.showData();
         }
-        csv.push_back(row);
-    }
+        inFile.close();
+    } else cout << "Could not open the file.\n";
 }
 
-RandomFile::RandomFile(std::string filename, std::string outfile)
-{
-	this->filename_ = filename;
-	// TODO : Initialize random file
-	std::ifstream fp;
-	fp.open(filename, std::ios::in | std::ios::app);
+Record VariableRecordFile::readRecord(int n) {
+    fstream inFile;
+    long pos;
+    Record obj;
 
-	std::vector<std::vector<std::string>> records;
+    inFile.open(this->indexName, ios::in | ios::binary);
+    if (inFile.is_open()) {
+        inFile.seekg(n * sizeof(pos));
+        inFile.read((char *) &pos, sizeof(pos));
+        inFile.close();
 
-	parseCSV(fp, records);
-	fp.close();
+        inFile.open(this->fileName, ios::in | ios::binary);
+        if (inFile.is_open()) {
+            inFile.seekg(pos);
+            obj.read(inFile);
+            inFile.close();
+        } else cout << "Could not open the file.\n";
+    } else cout << "Could not open the index-file.\n";
 
-	int x = 1;
-	for (std::vector<std::string> row : records) {
-		std::pair<int, std::string> pair;
-		pair.first = x;
-		pair.second = row[0];
-		pairs.push_back(pair);
-		x++;
-	}
-
-	std::ofstream out;
-	out.open(outfile, std::ios::out);
-
-	for (std::pair<int, std::string> pair : pairs) {
-		std::string line = pair.first + ", " + pair.second + "\n";
-		out.write(line, sizeof(line));
-	}
-
-
+    return obj;
 }
 
-void RandomFile::insert(Register record)
-{
-	// TODO : Insert record into table
+int VariableRecordFile::size() {
+    int numRecords = 0;
+    fstream inFile;
+    inFile.open(this->indexName, ios::in | ios::binary);
+    if (inFile.is_open()) {
+        inFile.seekg(0, ios::end);
+        numRecords = inFile.tellg() / sizeof(long);
+        inFile.close();
+    } else cout << "Could not open the index-file.\n";
+    return numRecords;
 }
 
-Register RandomFile::search(int record_id)
-{
-	// TODO : Find and return register with id = record_id
-	
-	return Register();
+void writeString(fstream &stream, string str) {
+    int len = str.size();
+    stream.write((char *) &len, sizeof(len));
+    stream.write(str.c_str(), len);
+}
+
+string readString(fstream &stream) {
+    int tam;
+    stream.read((char *) &tam, sizeof(tam));
+    char *buffer = new char[tam + 1];
+    stream.read(buffer, tam);
+    buffer[tam] = '\0';
+    string result = buffer;
+    delete buffer;
+    return result;
 }
