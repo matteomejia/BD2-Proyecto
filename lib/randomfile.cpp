@@ -96,22 +96,17 @@ void VariableRecordFile::scanAll() {
     } else cout << "Could not open the file.\n";
 }
 
-/*
-* function to read a record
-*/
 Record VariableRecordFile::readRecord(int n) {
     fstream inFile;
     long pos;
     Record obj;
 
-        //read the position from the index file
     inFile.open(this->indexName, ios::in | ios::binary);
     if (inFile.is_open()) {
         inFile.seekg(n * sizeof(pos));
         inFile.read((char *) &pos, sizeof(pos));
         inFile.close();
 
-        //read the record
         inFile.open(this->fileName, ios::in | ios::binary);
         if (inFile.is_open()) {
             inFile.seekg(pos);

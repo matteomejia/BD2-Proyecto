@@ -24,11 +24,8 @@ private:
 
 public:
     void setData();
-
     void showData();
-
     long write(fstream &stream);
-
     bool read(fstream &stream);
 };
 
@@ -40,21 +37,13 @@ private:
 
 public:
     VariableRecordFile(string &_fileName);
-
     void writeRecord(Record obj);
-
     void scanAll();
-
-/*
-* function to read a record
-*/
     Record readRecord(int n);
-
     int size();
 };
 
 void writeString(fstream &stream, string str);
-
 string readString(fstream &stream);
 
 #endif
