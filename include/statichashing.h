@@ -22,7 +22,8 @@ public:
     Hash(int size, int fd, std::string filename);
     int hashingFunction(int key);
     bool fullBucket(Bucket *bucket);
-    void insert(std::string input);
+    void insertHash(std::string input);
+	void insert(std::string input);
     std::string search(int key);
 };
 

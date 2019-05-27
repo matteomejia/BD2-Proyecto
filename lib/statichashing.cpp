@@ -30,7 +30,7 @@ Hash::Hash(int size, int fd, std::string filename) {
     this->fd = fd;
 
     for(int i = 0; i < size; i++) {
-        Bucket temp(i, std::to_string(i).append(".md"), nullptr);
+        Bucket temp(i, std::to_string(i).append(".md"));
         this->hashTable[i] = temp;
     }
 
@@ -71,11 +71,11 @@ Hash::Hash(int size, int fd, std::string filename) {
     }
 }
 
-int hashingFunction(int key) {
+int Hash::hashingFunction(int key) {
 	return key % size;
 }
 
-bool fullBucket(Bucket *bucket) {
+bool Hash::fullBucket(Bucket *bucket) {
 	if(bucket->count < fd) {
 		return false;
 	}else {
@@ -83,33 +83,91 @@ bool fullBucket(Bucket *bucket) {
 	}
 }
 
-void insert(std::string insert) {
-	Bucket *bucket = hashTable[hashingFunction(std::stoi(insert.substr(0, insert.find(","))))];
+void Hash::insertHash(std::string input){
+	Bucket *bucket = new Bucket(hashTable[hashingFunction(std::stoi(input.substr(0, input.find(","))))]);
 
-	while(bucket->next != nullptr) {
-		bucket = bucket->next;
-	}
+    while(bucket->next != nullptr){
+        bucket = bucket->next;
+    }
 
-	if(fullBucket(bucket)) {
-		Bucket *temp = new Bucket(bucketNum, std::to_string(bucketNum).append(".md"), temp);
-		bucketNum++;
-		bucket = temp;
-	}
+    if(fullBucket(bucket)){
+        Bucket *temp = new Bucket(bucketNum, std::to_string(bucketNum).append(".md"));
 
-	std::string bucketFile = bucket->name;
+        bucket->next = temp;
+        bucketNum++;
 
-	std::ofstream output;
-	output.open(bucketFile, std::ios::app);
+        bucket = temp;
+    }
 
-	if(output.is_open()) {
-		output << insert << std::endl;
-		bucket->count += 1;
-	}
+    std::string name = bucket->name;
 
-	output.close();
+    std::ofstream output;
+    output.open(name, std::ios::app);
+
+    if(output.is_open()){
+        output << input << std::endl;
+        bucket->count += 1;
+    }
+
+    output.close();
 }
 
-std::string search(int key) {
+void Hash::insert(std::string input){
+    int id = hashingFunction(std::stoi(input.substr(0, input.find(","))));
+
+    std::ifstream bucketTable;
+    bucketTable.open(std::to_string(id).append("_index.md"));
+    std::string bucket;
+	std::string temp;
+    if(bucketTable.is_open()){
+        while(getline(bucketTable, temp)){
+            bucket = temp;
+        }
+    }
+    bucketTable.close();
+
+    std::ifstream bucketFile;
+    int count = 0;
+    bucketFile.open(bucket);
+    if(bucketFile.is_open()){
+        while(getline(bucketFile,temp))
+            count++;
+        bucketFile.close();
+        if (count < fd){
+            std::ofstream newBucket;
+            newBucket.open(bucket, std::ios::app);
+            if(newBucket.is_open()){   
+                newBucket << input << std::endl;
+            }
+            newBucket.close();
+        }
+        else{
+            std::ofstream newBucket;
+            newBucket.open(std::to_string(bucketNum).append(".md"));
+            if(newBucket.is_open()){
+            	newBucket << input << std::endl;
+            	std::ofstream index;
+            	index.open(std::to_string(id).append("_index.md"), std::ios::app);
+            	if(index.is_open()) {
+					index << std::to_string(bucketNum).append(".md") << std::endl;
+					bucketNum++;
+				}
+            	index.close();
+            }
+            newBucket.close();
+		    std::ofstream hashFile;
+	        hashFile.open("hash.md");
+            if(hashFile.is_open()){
+                hashFile << std::to_string(size) << std::endl;
+                hashFile << std::to_string(bucketNum) << std::endl;
+                hashFile << std::to_string(fd) << std::endl;
+            }
+		    hashFile.close();
+        }
+    }
+}
+
+std::string Hash::search(int key) {
 	int id = hashingFunction(key);
 	std::ifstream index;
 	index.open(std::to_string(id).append("_index.md"));

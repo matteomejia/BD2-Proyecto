@@ -6,13 +6,13 @@ class Bucket{
 public:
     int id;
     std::string name;
-    Bucket *next = nullptr;
-    int count = 0;
+    Bucket *next;
+    int count;
 public:
-    Bucket(int _id, std::string _name, Bucket *_next) {
-        this->id = _id;
-        this->name = _name;
-        this->next = _next;
+    Bucket(int id, std::string name) {
+        this->id = id;
+        this->name = name;
+        this->next = nullptr;
         this->count = 0;
-    };
+    }
 };

@@ -2,48 +2,46 @@
 #define RANDOM_FILE_H_
 
 #include <iostream>
-#include<fstream>
-#include<cstdio>
+#include <fstream>
+#include <cstdio>
 
-using namespace std;
+void writeString(std::fstream &stream, std::string str);
 
-void writeString(fstream &stream, string str);
-
-string readString(fstream &stream);
+std::string readString(std::fstream &stream);
 
 class Record {
 private:
-    string name;
-    string age;
-    string nationality;
-    string overall;
-    string club;
-    string value;
-    string position;
-    string jersey_number;
+    std::string name;
+    std::string age;
+    std::string nationality;
+    std::string overall;
+    std::string club;
+    std::string value;
+    std::string position;
+    std::string jersey_number;
 
 public:
     void setData();
     void showData();
-    long write(fstream &stream);
-    bool read(fstream &stream);
+    long write(std::fstream &stream);
+    bool read(std::fstream &stream);
 };
 
 class VariableRecordFile {
 
 private:
-    string fileName;
-    string indexName;
+    std::string fileName;
+    std::string indexName;
 
 public:
-    VariableRecordFile(string &_fileName);
+    VariableRecordFile(std::string &_fileName);
     void writeRecord(Record obj);
     void scanAll();
     Record readRecord(int n);
     int size();
 };
 
-void writeString(fstream &stream, string str);
-string readString(fstream &stream);
+void writeString(std::fstream &stream, std::string str);
+std::string readString(std::fstream &stream);
 
 #endif
