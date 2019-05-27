@@ -9,10 +9,10 @@ public:
     Bucket *next = nullptr;
     int count = 0;
 public:
-    Bucket(int _id, std::string _name, Bucket *_next) {
-        this->id = _id;
-        this->name = _name;
-        this->next = _next;
+    Bucket(int id, std::string name, Bucket *next) {
+        this->id = id;
+        this->name = name;
+        this->next = next;
         this->count = 0;
     };
 };
