@@ -8,16 +8,21 @@
 #include <sstream>
 
 Hash::Hash(std::string filename) {
+	// TODO : Replace getline calls (marked below) with variables given from imput.
+	// This module does not interact with iostream. There is a class that will do.
+	// That class will create and manage this class (class Hash)
+	// There shouln't be any call to getline in all this file.
+
 	std::ifstream hashFile;
     hashFile.open(filename);
 
     if(hashFile.is_open()){
         std::string temp;
-        getline(hashFile, temp);
+        getline(hashFile, temp); // Replace with input variable
         this->size = std::stoi(temp);
-        getline(hashFile, temp);
+        getline(hashFile, temp); // Replace with input variable
         this->bucketNum = std::stoi(temp);
-        getline(hashFile, temp);
+        getline(hashFile, temp); // Replace with input variable
         fd = std::stoi(temp);
     }
 
@@ -84,6 +89,7 @@ bool Hash::fullBucket(Bucket *bucket) {
 }
 
 void Hash::insertHash(std::string input){
+	// TODO : Make correct implementation: Replace "" in bucket construction
 	Bucket *bucket = new Bucket(hashTable[hashingFunction(std::stoi(input.substr(0, input.find(","))))]);
 
     while(bucket->next != nullptr){
@@ -134,7 +140,7 @@ void Hash::insert(std::string input){
             count++;
         bucketFile.close();
         if (count < fd){
-            std::ofstream newBucket;
+            std::ofstream newBucket; // TODO : Refactor variable. Name should represent a file type, not a Bucket type.
             newBucket.open(bucket, std::ios::app);
             if(newBucket.is_open()){   
                 newBucket << input << std::endl;
@@ -142,7 +148,7 @@ void Hash::insert(std::string input){
             newBucket.close();
         }
         else{
-            std::ofstream newBucket;
+            std::ofstream newBucket; // TODO : Refactor variable. Name should represent a file type, not a Bucket type.
             newBucket.open(std::to_string(bucketNum).append(".md"));
             if(newBucket.is_open()){
             	newBucket << input << std::endl;
@@ -178,10 +184,13 @@ std::string Hash::search(int key) {
 			std::ifstream searchFile;
 			searchFile.open(bucket);
 
+			// TODO : Close searchFile. It is never closed.
+
 			if(searchFile.is_open()) {
 				std::string temp;
 				while(getline(searchFile, temp)) {
 					if(temp.find(std::to_string(key)) != std::string::npos) {
+						// TODO : Files must be closed. Both searchFile and index.
 						return temp;
 					}
 				}
@@ -189,5 +198,5 @@ std::string Hash::search(int key) {
 		}
 	}
 	index.close();
-	return "ERROR";
+	return "ERROR"; // TODO : Replace with exception.
 }

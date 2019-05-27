@@ -10,6 +10,8 @@
 #include <string>
 #include <sstream>
 
+// TODO : Refactor. Give a more descriptive name for the class.
+
 class Hash{
 private:
     int size;

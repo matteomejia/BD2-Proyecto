@@ -141,6 +141,6 @@ std::string readString(std::fstream &stream) {
     stream.read(buffer, tam);
     buffer[tam] = '\0';
     std::string result = buffer;
-    delete buffer;
+    delete [] buffer;
     return result;
 }
