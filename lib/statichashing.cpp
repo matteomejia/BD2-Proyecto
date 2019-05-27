@@ -30,7 +30,7 @@ Hash::Hash(int size, int fd, std::string filename) {
     this->fd = fd;
 
     for(int i = 0; i < size; i++) {
-        Bucket temp(i, std::to_string(i).append(".md"), nullptr);
+        Bucket temp(i, std::to_string(i).append(".md"));
         this->hashTable[i] = temp;
     }
 
@@ -91,7 +91,7 @@ void Hash::insertHash(std::string input){
     }
 
     if(fullBucket(bucket)){
-        Bucket *temp = new Bucket(bucketNum, std::to_string(bucketNum).append(".md"), nullptr);
+        Bucket *temp = new Bucket(bucketNum, std::to_string(bucketNum).append(".md"));
 
         bucket->next = temp;
         bucketNum++;
