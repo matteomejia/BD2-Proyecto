@@ -11,7 +11,7 @@ class FileOrganizer
 protected:
 	std::string filename_;
 
-	virtual void writeRecord(Register record);
+	virtual void writeRecord(Register record, int index);
 	virtual Register readRecord(int index);
 
 public:
