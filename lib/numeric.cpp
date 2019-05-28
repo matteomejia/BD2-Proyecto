@@ -2,6 +2,8 @@
 
 #include "numeric.h"
 
+//Unused
+
 template <typename T>
 std::ostream &operator<< (std::ostream &os, const DataType<T> &container)
 {

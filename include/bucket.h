@@ -5,11 +5,12 @@
 #include <string>
 #include <vector>
 
-class Bucket
-{
+class Bucket {
 public:
     int id;
     std::string name;
+    int age;
+    std::string nationality;
     Bucket *next;
     int count;
 public:

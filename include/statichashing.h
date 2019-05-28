@@ -12,8 +12,7 @@
 
 class StaticHash{
 private:
-    int size;
-    int fd;
+    int size, fd;
     int bucketNum = 0;
     std::vector<Bucket> hashTable;
 

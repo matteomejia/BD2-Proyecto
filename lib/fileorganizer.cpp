@@ -3,6 +3,8 @@
 #include "register.h"
 #include "fileorganizer.h"
 
+//Unused
+
 void FileOrganizer::writeRecord(Register record, int index)
 {
 	// TODO : Open this->filename and write raw record in position index

@@ -3,6 +3,8 @@
 
 #include "statichashtablenode.h"
 
+//Unused file, meant for a more complex implementation
+
 template <typename K, typename V>
 class Hash
 {

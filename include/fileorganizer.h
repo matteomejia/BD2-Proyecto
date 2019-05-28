@@ -6,6 +6,8 @@
 #include "register.h"
 #include <iostream>
 
+//Unused file, meant for cross-compatibility between organizations
+
 class FileOrganizer
 {
 protected:

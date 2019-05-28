@@ -9,6 +9,7 @@ void writeString(std::fstream &stream, std::string str);
 
 std::string readString(std::fstream &stream);
 
+//Records simulates a Soccer player, based on the chosen CSV
 class Record {
 private:
     std::string name;
@@ -27,6 +28,8 @@ public:
     bool read(std::fstream &stream);
 };
 
+
+//From previous exercises, this class handles the communication between Record and the file
 class VariableRecordFile {
 
 private:

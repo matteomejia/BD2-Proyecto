@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+//Unused file, meant for cross-implementation of file organizations
+
 template <typename T>
 class DataType
 {

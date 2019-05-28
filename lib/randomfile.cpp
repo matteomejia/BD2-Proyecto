@@ -3,7 +3,7 @@
 #include <cstdio>
 #include "randomfile.h"
 
-void Record::setData() {
+void Record::setData() {//Basic creation of Record
     std::cout << "Name: ";
     std::cout << "Age: ";
     std::cin >> name;
@@ -22,7 +22,7 @@ void Record::setData() {
     std::cin >> jersey_number;
 }
 
-void Record::showData() {
+void Record::showData() {//Basic view of Record
     std::cout << "Name: " << name;
     std::cout << "Age: " << age;
     std::cout << "Nationality: " << nationality;
@@ -33,7 +33,7 @@ void Record::showData() {
     std::cout << "Number: " << jersey_number;
 }
 
-long Record::write(std::fstream &stream) {
+long Record::write(std::fstream &stream) {//Writing to file
     long pos_begin = stream.tellp();
     stream.write((char *) &jersey_number, sizeof(jersey_number));
     writeString(stream, name);
@@ -46,7 +46,7 @@ long Record::write(std::fstream &stream) {
     return pos_begin;
 }
 
-bool Record::read(std::fstream &stream) {
+bool Record::read(std::fstream &stream) {//Reading from file
     stream.read((char *) &jersey_number, sizeof(jersey_number));
     if (stream.fail()) return false;
     name = readString(stream);

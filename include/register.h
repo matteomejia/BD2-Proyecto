@@ -1,6 +1,8 @@
 #ifndef REGISTER_H_
 #define REGISTER_H_
 
+//Unused file because it was implemented internally in the organizations
+
 class Register
 {
 	int id_;

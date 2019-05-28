@@ -1,5 +1,7 @@
 #include "datatype.h"
 
+//Unused
+
 template <typename T>
 DataType<T>::DataType()
 {
