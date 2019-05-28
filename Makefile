@@ -25,8 +25,6 @@ re: clean all
 
 run: all
 	./bin/main
-	neato -Tpng exports/dot/test.dot > exports/images/output.png
-	open exports/images/output.png
 
 clean:
 	rm -rf $(BIN)/*
